@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080910">
+
+<title>Maze Online Max — Download for Android</title>
+
+<meta name="description" content="Download Maze Online Max APK for Android. Your next multiplayer maze adventure starts here.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* GLOBAL */
+
+:root {
+  --bg: #080910;
+  --surface: #131522;
+  --purple: #a56bff;
+  --purple-dark: #7542ed;
+  --text: #fff;
+  --muted: #a1a5ba;
+  --border: #292d42;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Outfit", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.container {
+  width: min(100% - 40px, 1100px);
+  margin: auto;
+}
+
+/* BACKGROUND AURA */
+
+.aura {
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.aura-one {
+  width: 440px;
+  height: 440px;
+  background: #6d39e64d;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.aura-two {
+  width: 350px;
+  height: 350px;
+  background: #4730a62e;
+  top: 850px;
+  right: -150px;
+}
+
+/* NAVIGATION */
+
+nav {
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.logo-icon {
+  width: 45px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #a66aff, #5e61ed);
+  font-size: 24px;
+}
+
+.logo span span {
+  color: #b58cff;
+}
+
+.nav-link {
+  background: #1c1e2d;
+  border: 1px solid #30344a;
+  padding: 12px 20px;
+  border-radius: 13px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  transition: .3s;
+}
+
+.nav-link:hover {
+  background: #292c42;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 115px 0 130px;
+  position: relative;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #1c1b31;
+  border: 1px solid #383052;
+  color: #c8b4ff;
+  padding: 11px 18px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.hero-label .dot {
+  background: #2fe393;
+  box-shadow: 0 0 12px #2fe393;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.hero h1 {
+  font-size: clamp(48px, 9vw, 92px);
+  letter-spacing: -4px;
+  font-weight: 900;
+  line-height: 1.07;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #bd8cff, #8b8aff, #c78dff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-description {
+  max-width: 550px;
+  margin: 27px auto 35px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 19px 35px;
+  background: linear-gradient(135deg, #a45dff, #695af4);
+  border-radius: 19px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: 0 12px 45px #8c57fa55;
+  transition: .3s;
+}
+
+.hero-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 55px #8c57fa85;
+}
+
+.hero-small {
+  color: #777e99;
+  font-size: 12px;
+  margin-top: 22px;
+}
+
+/* DIVIDER */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #34334f,
+    transparent
+  );
+}
+
+/* DOWNLOAD SECTION */
+
+.download-section {
+  padding: 110px 0 130px;
+  text-align: center;
+  scroll-margin-top: 25px;
+}
+
+.section-badge {
+  display: inline-block;
+  background: #231d38;
+  color: #c3a5ff;
+  border: 1px solid #473363;
+  padding: 10px 17px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 23px;
+}
+
+.download-section h2 {
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 17px;
+}
+
+.section-description {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 580px;
+  margin: auto;
+}
+
+/* SCREENSHOT */
+
+.screenshot-container {
+  margin: 55px auto 40px;
+  max-width: 760px;
+  position: relative;
+}
+
+.screenshot-container::before {
+  content: "";
+  position: absolute;
+  inset: 35px;
+  background: #8851ff55;
+  filter: blur(85px);
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.screenshot-box {
+  background: #151827;
+  border: 1px solid #373650;
+  padding: 18px;
+  border-radius: 30px;
+  box-shadow: 0 25px 80px #00000065;
+}
+
+.screenshot-box img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 19px;
+}
+
+.screenshot-caption {
+  color: #8c93ad;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+/* INFORMATION */
+
+.info-box {
+  max-width: 760px;
+  text-align: left;
+  background: #151827;
+  border: 1px solid #31354d;
+  border-radius: 24px;
+  padding: 28px;
+  margin: 35px auto 45px;
+}
+
+.info-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 19px;
+  margin-bottom: 16px;
+}
+
+.info-box p {
+  color: #abb0c5;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.info-box strong {
+  color: white;
+}
+
+/* FINAL DOWNLOAD */
+
+.final-download {
+  max-width: 760px;
+  margin: auto;
+}
+
+.download-button {
+  position: relative;
+  width: 100%;
+  border: 1px solid #c2a2ff70;
+  border-radius: 23px;
+  padding: 24px 30px;
+  overflow: hidden;
+  color: white;
+  font-size: 21px;
+  font-weight: 800;
+  background: linear-gradient(
+    110deg,
+    #8047f3,
+    #a65aff,
+    #695df7
+  );
+  box-shadow:
+    0 12px 45px #8957ff50,
+    inset 0 1px 1px #ffffff55;
+  transition: .3s;
+  isolation: isolate;
+}
+
+.download-button::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 200%;
+  background: #ffffff35;
+  filter: blur(35px);
+  transform: rotate(25deg);
+  top: -50%;
+  left: -200px;
+  z-index: -1;
+  transition: .6s;
+}
+
+.download-button:hover::before {
+  left: 120%;
+}
+
+.download-button:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 65px #8957ff85,
+    inset 0 1px 1px #ffffff70;
+}
+
+.download-button:disabled {
+  opacity: .8;
+  cursor: wait;
+}
+
+.download-button:disabled:hover {
+  transform: none;
+}
+
+.download-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  color: #8f96af;
+  font-size: 12px;
+  margin-top: 23px;
+}
+
+/* COUNTDOWN */
+
+.countdown-card {
+  display: none;
+  margin-top: 25px;
+  background: #16192a;
+  border: 1px solid #42375e;
+  padding: 30px;
+  border-radius: 25px;
+  animation: fadeIn .35s ease;
+}
+
+.countdown-card.active {
+  display: block;
+}
+
+.countdown-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.countdown-card p {
+  color: #a4aac1;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.countdown-number {
+  font-size: 70px;
+  font-weight: 900;
+  color: #b18aff;
+  margin: 15px 0;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  background: #33374f;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #a65aff, #6564fa);
+  transition: width 1s linear;
+}
+
+.manual-link {
+  display: none;
+  color: #cbb0ff;
+  font-weight: 700;
+  margin-top: 18px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid #25283a;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+footer p {
+  color: #858ba5;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+footer a {
+  color: #ba9aff;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MOBILE */
+
+@media(max-width: 600px) {
+
+  .container {
+    width: min(100% - 30px, 1100px);
+  }
+
+  nav {
+    height: 75px;
+  }
+
+  .logo {
+    font-size: 19px;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .nav-link {
+    padding: 11px 13px;
+    font-size: 12px;
+  }
+
+  .hero {
+    padding: 95px 0 100px;
+  }
+
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+  }
+
+  .hero-button {
+    width: 100%;
+  }
+
+  .download-section {
+    padding: 75px 0 90px;
+  }
+
+  .screenshot-container {
+    margin-top: 35px;
+  }
+
+  .screenshot-box {
+    padding: 9px;
+    border-radius: 22px;
+  }
+
+  .screenshot-box img {
+    border-radius: 15px;
+  }
+
+  .info-box {
+    padding: 22px;
+  }
+
+  .download-button {
+    font-size: 18px;
+    padding: 22px;
+  }
+
+  .countdown-card {
+    padding: 22px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="aura aura-one"></div>
+<div class="aura aura-two"></div>
+
+<div class="container">
+
+<!-- NAVIGATION -->
+
+<nav>
+
+  <a href="#" class="logo">
+    <div class="logo-icon">🌀</div>
+    <span>Maze<span>Max</span></span>
+  </a>
+
+  <a href="#download" class="nav-link">
+    Download ↗
+  </a>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-label">
+    <span class="dot"></span>
+    MAZE ONLINE MAX · ANDROID
+  </div>
+
+  <h1>
+    Escape the<br>
+    <span class="gradient-text">Ordinary.</span>
+  </h1>
+
+  <p class="hero-description">
+    Every turn is a new challenge.
+    Dive into Maze Online Max and discover
+    an adventure where finding your way
+    is only the beginning.
+  </p>
+
+  <a href="#download" class="hero-button">
+    ↓ Download Maze Online Max
+  </a>
+
+  <p class="hero-small">
+    Android APK · Direct GitHub Download
+  </p>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- DOWNLOAD SECTION -->
+
+<section class="download-section" id="download">
+
+  <div class="section-badge">
+    ✦ OFFICIAL DOWNLOAD
+  </div>
+
+  <h2>
+    Your Next Adventure<br>
+    <span class="gradient-text">Starts Here.</span>
+  </h2>
+
+  <p class="section-description">
+    Before downloading, take a moment to review
+    the Android installation information below.
+    This will help you understand any warning
+    your device might display.
+  </p>
+
+  <!-- FULL SCREENSHOT -->
+
+  <div class="screenshot-container">
+
+    <div class="screenshot-box">
+
+      <img
+        src="https://raw.githubusercontent.com/google00000/automatic-octo-succotash/main/Screenshot_2026-10-19_09-32-44%281%29.png"
+        alt="Android installation warning screenshot"
+        loading="lazy"
+        id="warningScreenshot"
+      >
+
+    </div>
+
+    <p class="screenshot-caption">
+      Example Android installation warning
+    </p>
+
+  </div>
+
+  <!-- INSTALLATION INFORMATION -->
+
+  <div class="info-box">
+
+    <h3 class="info-title">
+      🛡️ About This Warning
+    </h3>
+
+    <p>
+      Android may display a warning when installing
+  
+      <br><br>
+      <strong>Recommended:</strong>
+   Choose any one during installtion
+      <br><br>
+    20,000+ players
+    </p>
+
+  </div>
+
+  <!-- REAL DOWNLOAD BUTTON -->
+
+  <div class="final-download">
+
+    <button
+      class="download-button"
+      id="downloadButton"
+      onclick="beginDownload()"
+    >
+      ↓ Download Maze Online Max
+    </button>
+
+    <div class="download-meta">
+      <span>✓ Android APK</span>
+      <span> EZ Download</span>
+      <span>✓ No Account Required</span>
+    </div>
+
+    <!-- COUNTDOWN -->
+
+    <div class="countdown-card" id="countdownCard">
+
+      <h3 id="countdownTitle">
+        Preparing Your Download
+      </h3>
+
+      <p id="countdownDescription">
+        Your APK download will begin shortly.
+      </p>
+
+      <div class="countdown-number" id="countdown">
+        5
+      </div>
+
+      <div class="progress">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="downloadStatus">
+      Downloading...
+      </p>
+
+      <a
+        class="manual-link"
+        id="manualDownload"
+        href="https://github.com/google00000/automatic-octo-succotash/raw/refs/heads/main/MazeMMax.apk"
+      >
+        ↓ Download APK Manually
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+  <p>
+    © 2026 Maze Online Max. All rights reserved.
+  </p>
+
+  <p>
+    Android is a trademark of Google LLC.
+    Not affiliated with Google Play.
+  </p>
+
+  <p>
+    <a
+      href="https://github.com/google00000/automatic-octo-succotash"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+       ↗
+    </a>
+  </p>
+
+</footer>
+
+<script>
+
+/* APK CONFIGURATION */
+
+const APK_URL =
+  "https://github.com/google00000/automatic-octo-succotash/raw/refs/heads/main/MazeMMax.apk";
+
+const DOWNLOAD_DELAY = 5;
+
+let timer = null;
+
+/* DOWNLOAD */
+
+function beginDownload() {
+
+  clearInterval(timer);
+
+  const button =
+    document.getElementById("downloadButton");
+
+  const card =
+    document.getElementById("countdownCard");
+
+  const countdown =
+    document.getElementById("countdown");
+
+  const progress =
+    document.getElementById("progressFill");
+
+  const title =
+    document.getElementById("countdownTitle");
+
+  const description =
+    document.getElementById("countdownDescription");
+
+  const status =
+    document.getElementById("downloadStatus");
+
+  const manual =
+    document.getElementById("manualDownload");
+
+  let seconds = DOWNLOAD_DELAY;
+
+  button.disabled = true;
+
+  button.textContent = "Preparing Download...";
+
+  card.classList.add("active");
+
+  countdown.textContent = seconds;
+
+  progress.style.width = "0%";
+
+  title.textContent = "Preparing Your Download";
+
+  description.textContent =
+    "Please wait while we prepare Maze Online Max.";
+
+  status.textContent = "Connecting..";
+
+  manual.style.display = "none";
+
+  timer = setInterval(() => {
+
+    seconds--;
+
+    countdown.textContent = seconds;
+
+    const percentage =
+      ((DOWNLOAD_DELAY - seconds) / DOWNLOAD_DELAY) * 100;
+
+    progress.style.width = percentage + "%";
+
+    if (seconds <= 0) {
+
+      clearInterval(timer);
+
+      title.textContent = "Your Download Is Ready!";
+
+      description.textContent =
+        "Your browser is opening the APK download.";
+
+      countdown.textContent = "✓";
+
+      status.textContent =
+        "If the download does not start, use the link below.";
+
+      manual.style.display = "inline-block";
+
+      button.disabled = false;
+
+      button.textContent = "↓ Download Again";
+
+      /*
+        GitHub serves the APK.
+        The browser determines whether it
+        downloads or opens the file.
+      */
+
+      const link = document.createElement("a");
+
+      link.href = APK_URL;
+
+      link.target = "_blank";
+
+      link.rel = "noopener noreferrer";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+    }
+
+  }, 1000);
+
+}
+
+/* IMAGE FALLBACK */
+
+document
+  .getElementById("warningScreenshot")
+  .addEventListener("error", function() {
+
+    const box = this.parentElement;
+
+    this.remove();
+
+    const message = document.createElement("p");
+
+    message.style.padding = "50px 15px";
+
+    message.style.color = "#a1a5ba";
+
+    message.textContent =
+      "Screenshot unavailable. View the original image on GitHub.";
+
+    box.appendChild(message);
+
+    const link = document.createElement("a");
+
+    link.href =
+      "https://github.com/google00000/automatic-octo-succotash/blob/main/Screenshot_2026-10-19_09-32-44(1).png";
+
+    link.target = "_blank";
+
+    link.rel = "noopener noreferrer";
+
+    link.textContent = "View Screenshot ↗";
+
+    link.style.color = "#ba9aff";
+
+    link.style.display = "inline-block";
+
+    link.style.marginBottom = "25px";
+
+    box.appendChild(link);
+
+  });
+
+</script>
+
+</body>
+</html>
